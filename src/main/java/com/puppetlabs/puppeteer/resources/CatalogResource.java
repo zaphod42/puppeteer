@@ -1,6 +1,7 @@
 package com.puppetlabs.puppeteer.resources;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
@@ -12,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.codehaus.jackson.JsonProcessingException;
 
-import com.puppetlabs.puppeteer.Catalog;
+import com.puppetlabs.puppeteer.ResponseDocument;
 import com.puppetlabs.puppeteer.RubyCatalogCompile;
 import com.puppetlabs.puppeteer.Node;
 import com.sun.jersey.spi.resource.Singleton;
@@ -35,7 +36,7 @@ public class CatalogResource {
 	@GET
 	@Path("{environment}/{node}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Catalog compile(@PathParam("environment") Environment environment, @PathParam("node") Node node) throws JsonProcessingException, IOException {
+	public ResponseDocument<Catalog> compile(@PathParam("environment") Environment environment, @PathParam("node") Node node) throws JsonProcessingException, IOException, IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		return catalogSource.compile(environment, node);
 	}
 }

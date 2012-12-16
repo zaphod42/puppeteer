@@ -1,6 +1,7 @@
 package com.puppetlabs.puppeteer;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.jruby.CompatVersion;
 import org.jruby.embed.LocalContextScope;
 import org.jruby.embed.ScriptingContainer;
 
+import com.puppetlabs.puppeteer.resources.Catalog;
 import com.puppetlabs.puppeteer.resources.Environment;
 
 public class RubyCatalogCompile {
@@ -20,9 +22,9 @@ public class RubyCatalogCompile {
 		this.paths = paths;
 	}
 	
-	public Catalog compile(Environment environment, Node node) throws JsonProcessingException, IOException {
+	public ResponseDocument<Catalog> compile(Environment environment, Node node) throws JsonProcessingException, IOException, IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		CatalogSource puppeteer = sourceFor(environment);
-		return new Catalog(puppeteer.catalog(node.name));
+		return ResponseDocument.respond(puppeteer.catalog(node.name), Catalog.class);
 	}
 	
 	private CatalogSource sourceFor(Environment environment) {
