@@ -3,37 +3,21 @@ package com.puppetlabs.puppeteer.resources;
 import org.codehaus.jackson.JsonNode;
 
 public class Catalog {
-	private final JsonNode data;
+	public final JsonNode tags;
+	public final String name;
+	public final int version;
+	public final String environment;
+	public final JsonNode resources;
+	public final JsonNode edges;
+	public final JsonNode classes;
 
 	public Catalog(JsonNode data) {
-		this.data = data;
-	}
-	
-	public JsonNode getTags() {
-		return data.get("tags");
-	}
-	
-	public String getName() {
-		return data.get("name").asText();
-	}
-	
-	public int getVersion() {
-		return data.get("version").asInt();
-	}
-	
-	public String getEnvironment() {
-		return data.get("environment").asText();
-	}
-	
-	public JsonNode getResources() {
-		return data.get("resources");
-	}
-	
-	public JsonNode getEdges() {
-		return data.get("edges");
-	}
-	
-	public JsonNode getClasses() {
-		return data.get("classes");
+		tags = data.get("tags");
+		name = data.get("name").asText();
+		version = data.get("version").asInt();
+		environment = data.get("environment").asText();
+		resources = data.get("resources");
+		edges = data.get("edges");
+		classes = data.get("classes");
 	}
 }
