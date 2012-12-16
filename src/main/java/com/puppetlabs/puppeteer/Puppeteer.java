@@ -6,6 +6,9 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig.Feature;
+
 import com.puppetlabs.puppeteer.resources.CatalogResource;
 
 public class Puppeteer extends Application {
@@ -19,7 +22,13 @@ public class Puppeteer extends Application {
 
 	public Set<Object> getSingletons() {
         Set<Object> singletons = new HashSet<Object>();
-        Collections.addAll(singletons, new org.codehaus.jackson.jaxrs.JacksonJsonProvider());
+        Collections.addAll(singletons, prettyJsonProvider());
         return singletons;
+	}
+
+	private org.codehaus.jackson.jaxrs.JacksonJsonProvider prettyJsonProvider() {
+		ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(Feature.INDENT_OUTPUT, true);
+        return new org.codehaus.jackson.jaxrs.JacksonJsonProvider(mapper);
 	}
 }

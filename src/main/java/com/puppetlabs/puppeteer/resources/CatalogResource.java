@@ -33,12 +33,6 @@ public class CatalogResource {
 	}
 	
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Catalog dunno() throws JsonProcessingException, IOException {
-		return new Catalog("{ \"message\": \"catalog thingy\" }");
-	}
-	
-	@GET
 	@Path("{environment}/{node}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Catalog compile(@PathParam("environment") Environment environment, @PathParam("node") Node node) throws JsonProcessingException, IOException {
