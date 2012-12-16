@@ -16,4 +16,10 @@ public class Puppeteer extends Application {
 		Collections.addAll(resources, CatalogResource.class);
 		return resources;
 	}
+
+	public Set<Object> getSingletons() {
+        Set<Object> singletons = new HashSet<Object>();
+        Collections.addAll(singletons, new org.codehaus.jackson.jaxrs.JacksonJsonProvider());
+        return singletons;
+	}
 }
