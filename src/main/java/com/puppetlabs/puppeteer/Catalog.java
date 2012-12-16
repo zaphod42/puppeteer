@@ -1,17 +1,15 @@
 package com.puppetlabs.puppeteer;
 
-import java.io.PrintWriter;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Catalog {
+	
+	public String externalCatalog;
 
-	private final Object externalCatalog;
-
+	public Catalog() {}
+	
 	public Catalog(Object object) {
-		this.externalCatalog = object;
+		this.externalCatalog = object.toString();
 	}
-
-	public void write(PrintWriter writer) {
-		writer.print(externalCatalog);
-	}
-
 }
