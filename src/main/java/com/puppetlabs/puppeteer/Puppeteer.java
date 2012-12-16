@@ -8,6 +8,7 @@ import javax.ws.rs.core.Application;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig.Feature;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 import com.puppetlabs.puppeteer.resources.CatalogResource;
 
@@ -29,6 +30,7 @@ public class Puppeteer extends Application {
 	private org.codehaus.jackson.jaxrs.JacksonJsonProvider prettyJsonProvider() {
 		ObjectMapper mapper = new ObjectMapper();
         mapper.configure(Feature.INDENT_OUTPUT, true);
+        mapper.setSerializationInclusion(Inclusion.NON_NULL);
         return new org.codehaus.jackson.jaxrs.JacksonJsonProvider(mapper);
 	}
 }
