@@ -1,13 +1,20 @@
 package com.puppetlabs.puppeteer;
 
+import java.io.IOException;
+
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.map.ObjectMapper;
+
 
 public class Catalog {
 	
-	public String externalCatalog;
+	public JsonNode externalCatalog;
 
 	public Catalog() {}
 	
-	public Catalog(Object object) {
-		this.externalCatalog = object.toString();
+	public Catalog(String json) throws JsonProcessingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		this.externalCatalog = mapper.readTree(json);
 	}
 }
